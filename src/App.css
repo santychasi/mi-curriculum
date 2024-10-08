@@ -1,38 +1,917 @@
-.App {
+/*********************************** Estilos base para el navbar */
+
+/* Estilos base para el navbar */
+.new-navbar {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: rgba(236, 240, 241, 0.1); /* Transparencia */
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: top 0.3s ease-in-out, background-color 0.5s ease-in-out;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+}
+/* Cambia el fondo cuando el usuario hace scroll */
+.new-navbar.scrolled {
+  background-color: rgba(35, 88, 187, 0.70); /* Cambia temporalmente a rojo para probar */
+  backdrop-filter: blur(5px); /* Menos difuminado */
+}
+
+/* Estilos de los enlaces del navbar */
+.new-navbar .nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center; /* Alinea los botones en el centro verticalmente */
+  gap: 2rem; /* Espacio uniforme entre los botones */
+  margin: 0;
+  padding: 0;
+}
+
+.new-navbar .nav-links li a {
+  font-size: 1.2rem; /* Aumenta el tamaño de la fuente */
+  color: rgb(255, 255, 255); /* Color inicial: elegante tono gris azulado */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  position: relative;
+  transition: color 0.4s ease, transform 0.3s ease; /* Transición suave de color y desplazamiento */
+}
+
+.new-navbar .nav-links li a::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background-color: rgb(192, 67, 67); /* Elegante barra inferior */
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.new-navbar .nav-links li a:hover::before {
+  visibility: visible;
+  transform: scaleX(1); /* Barra que aparece al pasar el cursor */
+}
+
+.new-navbar .nav-links li a:hover {
+  color: rgb(32, 43, 53); /* Cambia a un tono más oscuro al hacer hover */
+  transform: translateY(-3px); /* Efecto de desplazamiento vertical suave */
+}
+
+/* Estilos para el logo */
+.new-navbar .logo h1 {
+  font-size: 2rem; /* Aumenta el tamaño del logo */
+  color: rgb(44, 62, 80); /* Color elegante para el logo */
+  font-weight: bold;
+  margin: 0;
+  transition: color 0.4s ease;
+}
+
+.new-navbar .logo h1:hover {
+  color: rgb(165, 19, 19); /* El logo también cambia de color al hacer hover */
+}
+
+/* Estilos de los botones del navbar */
+.new-navbar .nav-button {
+  font-size: 1.2rem;
+  color: rgb(255, 255, 255); /* Color blanco */
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  position: relative;
+  background: none; /* Sin fondo */
+  border: none; /* Sin bordes */
+  cursor: pointer;
+  transition: color 0.4s ease, transform 0.3s ease;
+}
+
+.new-navbar .nav-button::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background-color: rgb(192, 67, 67); /* Barra elegante inferior */
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.new-navbar .nav-button:hover::before {
+  visibility: visible;
+  transform: scaleX(1); /* Barra que aparece al pasar el cursor */
+}
+
+.new-navbar .nav-button:hover {
+  color: rgb(32, 43, 53); /* Cambia a un tono más oscuro al hacer hover */
+  transform: translateY(-3px); /* Efecto de desplazamiento vertical suave */
+}
+
+
+
+/******************************** Estilos para la sección del video de fondo */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Estilos para el video de fondo */
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Estilos para el botón */
+.scroll-button {
+  position: absolute;
+  bottom: 30px; /* Posición fija en la parte inferior del video */
+  right: 30px; /* Posición desde el lado derecho */
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco translúcido */
+  border: none;
+  padding: 0.8rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+.scroll-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+  transform: scale(1.1); /* Agranda el botón al hacer hover */
+}
+
+/* Animación para el icono dentro del botón */
+.scroll-icon {
+  color: #333;
+  animation: bounce 2s infinite; /* Efecto de rebote para el icono */
+}
+
+/* Efecto de rebote del icono */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+/********************************** Estilos para la sección "Sobre mí" */
+.sobre-mi-section {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.sobre-mi-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.sobre-mi-section p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.sobre-mi-section .mi-foto {
+  width: 200px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/******************************** Estilos para los conocimientos */
+.conocimientos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.conocimiento {
+  text-align: center;
+  width: 150px;
+  opacity: 0; /* Oculto inicialmente */
+  transform: translateY(50px); /* Aparece desde abajo */
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out; /* Transición suave */
+}
+
+/* Clase que se añadirá cuando el ítem sea visible */
+.conocimiento.visible {
+  opacity: 1;
+  transform: translateY(0); /* Vuelve a su posición original */
+}
+
+.conocimiento-img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .conocimientos {
+    flex-direction: column;
+    align-items: center;
   }
 }
 
-.App-header {
+
+
+/*************************************** Estilos para la sección de proyectos */
+
+.proyectos-section {
+  padding: 4rem 2rem;
+  background-color: #f0f0f0;
+}
+
+.proyectos-section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.proyecto {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar el contenido */
+  margin-bottom: 3rem;
+  flex-wrap: wrap; /* Permitir que los elementos se ajusten en pantallas pequeñas */
+  opacity: 0; /* Inicialmente invisible */
+  transform: translateY(100px); /* Aparece desde abajo */
+  transition: opacity 5s ease-out, transform 2s ease-out; /* Transición suave */
+}
+
+.proyecto.invertido {
+  flex-direction: row-reverse;
+}
+
+/* Aparecer cuando se hace scroll */
+.proyecto.visible {
+  opacity: 1;
+  transform: translateY(0); /* Aparece en su lugar original */
+}
+
+.proyecto-imagen img {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  margin: 0 1rem; /* Reducir el espacio horizontal */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out; /* Transición para el efecto de crecimiento */
+}
+
+.proyecto-imagen img:hover {
+  transform: scale(1.2); /* Aumenta ligeramente el tamaño de la imagen */
+}
+
+
+.proyecto-descripcion {
+  max-width: 500px;
+  margin: 0 10rem; /* Reducir el espacio horizontal */
+  
+}
+
+.proyecto-descripcion h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.proyecto-descripcion p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.detalle-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.detalle-button:hover {
+  background-color: #0056b3;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .proyecto {
+    flex-direction: column;
+  }
+  .proyecto.invertido {
+    flex-direction: column;
+  }
+  .proyecto-imagen img,
+  .proyecto-descripcion {
+    margin: 1rem 0;
+    text-align: center;
+  }
+}
+
+/****************************************** Estilos para el footer */
+.footer {
   background-color: #282c34;
-  min-height: 100vh;
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.footer-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.social-icons {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.social-icons a img {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+  filter: invert(100%);  /* Esto hace que el color negro se vuelva blanco */
+}
+
+.social-icons a img:hover {
+  transform: scale(1.1);
+  filter: invert(75%);  /* Hace que se vea ligeramente diferente al hacer hover */
+}
+
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .footer-content p {
+    font-size: 0.9rem;
+  }
+}
+
+
+/**************************************Estilos para todas las paginas de proyectos*/
+
+/* Estilos para el contenedor principal */
+.proyecto-detalle {
+  padding: 4rem;
+  background-color: #f4f4f9;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin: 3rem auto;
+  max-width: 1000px;
+}
+
+/* Título principal */
+.proyecto-titulo {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Imagen destacada del proyecto */
+.proyecto-imagen-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.proyecto-imagen-detalle {
+  max-width: 80%;
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Descripción detallada */
+.proyecto-descripcion {
+  margin-bottom: 3rem;
+}
+
+.proyecto-descripcion h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.proyecto-descripcion p, .proyecto-descripcion ul {
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.proyecto-descripcion ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+/* Tecnologías usadas */
+.tecnologias-usadas h3 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #444;
+}
+
+.tecnologias-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.tecnologia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.tecnologia:hover {
+  transform: scale(1.15);
+}
+
+.tecnologia-icono {
+  width: 70px;
+  height: auto;
+}
+
+/* Pasos del proyecto */
+.paso-container {
+  margin-bottom: 3rem;
+}
+
+.paso-item {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.paso-item.derecha {
+  text-align: right;
+}
+
+.paso-item.izquierda {
+  text-align: left;
+}
+
+.paso-item:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.paso-item h4 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: #007bff;
+}
+
+/* Botón de descarga */
+.descargar-documentacion {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.descargar-boton {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.8rem 1.8rem;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.descargar-boton:hover {
+  background-color: #0056b3;
+}
+
+.proyecto-imagen-detalle-principal {
+  max-width: 50%; /* Hacemos que la imagen principal sea más pequeña */
+  border-radius: 15px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Pasos del proyecto con imágenes */
+.paso-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.paso-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.paso-item.derecha {
+  flex-direction: row-reverse;
+}
+
+.paso-texto {
+  flex: 1;
+}
+
+.paso-imagen {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.paso-imagen img {
+  max-width: 50%;
+  border-radius: 8px;
+}
+
+.paso-item:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.paso-imagen {
+  width: 150px;
+  height: auto;
+  margin-left: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.proyecto-video {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.video-container {
+  max-width: 600px; /* Limita el ancho del video */
+  margin: 0 auto; /* Centra el video */
+}
+
+.proyecto-video-element {
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Añade sombra */
+}
+
+
+
+/****************************************Estilos para Certificaciones*******/
+
+/* Estilos para la sección de certificaciones */
+
+.certificaciones-container {
+  padding: 1rem;
+  text-align: center;
+  background-color: #f4f4f9;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 1000px;
+}
+
+.certificaciones-titulo {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.carrusel {
+  position: relative;
+  max-width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.carrusel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 2rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  z-index: 10;
 }
 
-.App-link {
-  color: #61dafb;
+.carrusel-control:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.carrusel-control.left {
+  left: 30px; /* Espaciado ajustado para que los botones estén visibles */
+}
+
+.carrusel-control.right {
+  right: 30px; /* Espaciado ajustado para que los botones estén visibles */
+}
+
+.slide {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.certificacion-imagen {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.indicadores {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.indicador {
+  height: 15px;
+  width: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 0 5px;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.indicador.activo {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.indicador:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.certificacion-imagen.loading {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certificacion-imagen.loaded {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.certificaciones-lista{
+  text-align: left;
+  font-size: 20px;
+}
+
+/**********************************************************Estilos para Contactos*******/
+
+/* Estilos generales */
+.contact-page {
+  padding: 8rem;
+  background-color: #f7f8fa;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.header-section h1 {
+  font-size: 3rem;
+  color: #333;
+  animation: fadeInDown 1s ease-out;
+}
+
+.header-section p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Flex para organizar información de contacto */
+.contact-info-section {
+  display: flex;
+  flex-wrap: wrap;  /* Permite que los elementos se envuelvan */
+  justify-content: space-around;
+  margin-bottom: 4rem;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.contact-info-item {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 1rem 0; /* Margen para mayor espacio en pantallas pequeñas */
+  flex: 1 1 200px; /* Cada elemento toma un mínimo de 200px de ancho */
+  transition: transform 0.3s ease;
+}
+
+.contact-info-item svg {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.contact-info-item:hover {
+  transform: scale(1.1);
+}
+
+.form-section {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap; /* Permite que los campos se ajusten a la pantalla */
+}
+
+input, textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mensajes de éxito y error */
+.success {
+  color: green;
+  margin-top: 1rem;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 7rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .header-section h1 {
+    font-size: 2.5rem;
   }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .contact-info-item {
+    flex: 1 1 100%; /* Toma todo el ancho en pantallas pequeñas */
+  }
+}
+
+
+
+/************************************Animacion De inicio de pagina web******************/
+/* Estilos para toda la app */
+.App {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Estilos de la animación de introducción */
+.intro-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 9999;
+}
+
+/* Estilos del video para centrarlo y mantenerlo visible */
+.intro-video {
+  width: 10vw;
+  height: 10vh;
+  object-fit: cover;
+  transition: all 5s ease;
+  opacity: 0; /* Comienza opaco */
+}
+
+/* Animación que expande el cuadro del video */
+.intro-animation.expand .intro-video {
+  width: 100vw;
+  height: 100vh;
+  opacity: 1; /* Termina claro */
+}
+
+/* Después de la animación, oculta el video */
+.App:not(.loading) .intro-animation {
+  display: none;
+}
+
+/* Mejoras visuales generales */
+.new-navbar {
+  position: fixed;
+  width: 100vw;
+  top: -110px; /* Comienza fuera de la pantalla */
+  left: 0;
+  z-index: 500;
+  transition: top 10s ease; /* Transición suave para la posición del navbar */
+  /*top: 0; /* Baja el navbar cuando la app está cargada */
+}
+
+.new-navbar {
+  top: 0; /* Baja el navbar cuando la app está cargada */
 }
