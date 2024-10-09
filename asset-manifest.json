@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mi-curriculum/static/css/main.71704bd0.css",
+    "main.js": "/mi-curriculum/static/js/main.872da8f5.js",
+    "static/js/453.1af2458b.chunk.js": "/mi-curriculum/static/js/453.1af2458b.chunk.js",
+    "index.html": "/mi-curriculum/index.html",
+    "main.71704bd0.css.map": "/mi-curriculum/static/css/main.71704bd0.css.map",
+    "main.872da8f5.js.map": "/mi-curriculum/static/js/main.872da8f5.js.map",
+    "453.1af2458b.chunk.js.map": "/mi-curriculum/static/js/453.1af2458b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.71704bd0.css",
+    "static/js/main.872da8f5.js"
+  ]
+}
